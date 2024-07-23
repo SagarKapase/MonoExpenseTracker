@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Gray shadow layer -->
+    <item android:left="0dp" android:top="2dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#e6e1e1" />
+            <corners android:radius="38dp" /> <!-- Adjust the radius as needed -->
+        </shape>
+    </item>
+
+    <!-- Button foreground layer -->
+    <item android:bottom="2dp" android:right="0dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/splashScreenColor" /> <!-- Your button color -->
+            <corners android:radius="38dp" /> <!-- Adjust the radius as needed -->
+        </shape>
+    </item>
+</layer-list>
