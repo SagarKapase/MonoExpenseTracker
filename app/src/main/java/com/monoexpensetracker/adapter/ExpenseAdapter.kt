@@ -7,12 +7,18 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.monoexpensetracker.databinding.ExpenseHistoryCardBinding
 import com.monoexpensetracker.dataclass.ExpenseDataClass
+import kotlin.math.exp
 
 class ExpenseAdapter(var datalist: ArrayList<ExpenseDataClass>,var context: Context):
     RecyclerView.Adapter<ExpenseAdapter.ExpenseViewHolder>() {
 
     inner class ExpenseViewHolder (var binding: ExpenseHistoryCardBinding):RecyclerView.ViewHolder(binding.root){
-
+        fun bind(expense: ExpenseDataClass)
+        {
+            binding.expenseName.text = expense.ExpenseName
+            binding.expenseDate.text = expense.ExpenseDate
+            binding.expenseValue.text = expense.ExpenseValue.toString()
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExpenseViewHolder {
@@ -25,12 +31,25 @@ class ExpenseAdapter(var datalist: ArrayList<ExpenseDataClass>,var context: Cont
     }
 
     override fun onBindViewHolder(holder: ExpenseViewHolder, position: Int) {
-        holder.binding.expenseName.text = datalist.get(position).ExpenseName
+        /*holder.binding.expenseName.text = datalist.get(position).ExpenseName
         holder.binding.expenseDate.text = datalist.get(position).ExpenseDate
-        holder.binding.expenseValue.text = datalist.get(position).ExpenseValue
+        holder.binding.expenseValue.text = datalist.get(position).ExpenseValue.toString()
         holder.itemView.setOnClickListener()
         {
             Toast.makeText(context,datalist.get(position).ExpenseName, Toast.LENGTH_SHORT).show()
+        }*/
+
+        val expense = datalist[position]
+        holder.bind(expense)
+        holder.itemView.setOnClickListener()
+        {
+            Toast.makeText(context,expense.ExpenseName,Toast.LENGTH_SHORT).show()
         }
+    }
+
+    fun addExpense(expense: ExpenseDataClass)
+    {
+        datalist.add(expense)
+        notifyItemInserted(datalist.size - 1)
     }
 }

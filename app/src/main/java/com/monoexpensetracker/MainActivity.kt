@@ -13,7 +13,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.monoexpensetracker.adapter.ExpenseAdapter
 import com.monoexpensetracker.databinding.ActivityMainBinding
-import com.monoexpensetracker.dataclass.Constant
 
 class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by lazy {
