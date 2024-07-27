@@ -34,7 +34,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.24000001" />
+                app:layout_constraintVertical_bias="0.3" />
 
             <TextView
                 android:id="@+id/expense_date"
@@ -51,18 +51,39 @@
                 app:layout_constraintTop_toBottomOf="@+id/expense_name" />
 
             <TextView
+                android:id="@+id/subtract_sign"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="140dp"
+                android:text="-"
+                android:textColor="@color/red"
+                android:textSize="40dp"
+                app:layout_constraintBottom_toBottomOf="@+id/expense_name"
+                app:layout_constraintStart_toEndOf="@+id/expense_name"
+                app:layout_constraintTop_toTopOf="@+id/expense_name" />
+
+            <ImageView
+                android:id="@+id/ruppedicon_card"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/rupeeicon"
+                app:layout_constraintBottom_toBottomOf="@+id/subtract_sign"
+                app:layout_constraintStart_toEndOf="@+id/subtract_sign"
+                app:layout_constraintTop_toTopOf="@+id/subtract_sign"
+                app:tint="@color/red" />
+
+            <TextView
                 android:id="@+id/expense_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Expense Value"
-                android:textColor="@color/black"
+                android:text="Value"
+                android:textColor="@color/red"
                 android:textSize="20sp"
-                android:gravity="start"
-                app:layout_constraintBottom_toBottomOf="@+id/expense_name"
+                app:layout_constraintBottom_toBottomOf="@id/ruppedicon_card"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.82"
-                app:layout_constraintStart_toEndOf="@+id/expense_name"
-                app:layout_constraintTop_toTopOf="@+id/expense_name" />
+                app:layout_constraintHorizontal_bias="0.01"
+                app:layout_constraintStart_toEndOf="@+id/ruppedicon_card"
+                app:layout_constraintTop_toTopOf="@+id/ruppedicon_card" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
