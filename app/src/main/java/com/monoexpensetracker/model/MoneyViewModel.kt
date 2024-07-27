@@ -18,6 +18,7 @@ class MoneyViewModel(application: Application) : AndroidViewModel(application) {
         private const val PREFS_NAME = "com.monoexpensetracker.prefs"
         private const val KEY_MONEY_AMOUNT = "money_amount"
         private const val KEY_EXPENSE_LIST = "expense_list"
+        private const val KEY_TOTAL_EXPENSE_AMOUNT = "total_expense"
     }
 
     private val prefs = application.getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE)
@@ -27,12 +28,17 @@ class MoneyViewModel(application: Application) : AndroidViewModel(application) {
     val moneyAmount: LiveData<String> get() = _moneyAmount
     //private var totalMoney = 0.0
 
+    //this is for the to observe the total expense amount
+    private val _totalExpenseAmount = MutableLiveData<String>()
+    val totalExpenseAmount : LiveData<String> get() = _totalExpenseAmount
+
     private val _expenseList = MutableLiveData<ArrayList<ExpenseDataClass>>()
     val expenseList: LiveData<ArrayList<ExpenseDataClass>> get() = _expenseList
 
     init {
         loadMoneyAmount()
         loadExpenseList()
+        loadTotalExpenseAmount()
     }
 
     fun loadMoneyAmount()
@@ -53,11 +59,22 @@ class MoneyViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun loadTotalExpenseAmount()
+    {
+        val amount = prefs.getFloat(KEY_TOTAL_EXPENSE_AMOUNT,0.0f).toDouble()
+        _totalExpenseAmount.value = formatAmount(amount)
+    }
+
     fun addExpense(expense: ExpenseDataClass) {
         val list = _expenseList.value ?: ArrayList()
         list.add(expense)
         _expenseList.value = list
         saveExpenseList(list)
+
+        val currentTotalExpense = prefs.getFloat(KEY_TOTAL_EXPENSE_AMOUNT,0.0f)
+        val newTotalExpense = currentTotalExpense + expense.ExpenseValue.toFloat()
+        prefs.edit().putFloat(KEY_TOTAL_EXPENSE_AMOUNT,newTotalExpense).apply()
+        _totalExpenseAmount.value = formatAmount(newTotalExpense.toDouble())
     }
     private fun saveExpenseList(list: ArrayList<ExpenseDataClass>)
     {

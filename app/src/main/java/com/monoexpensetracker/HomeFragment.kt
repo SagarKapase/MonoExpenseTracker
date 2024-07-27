@@ -25,6 +25,7 @@ class HomeFragment : Fragment() {
     private lateinit var expenseAdapter: ExpenseAdapter
     private val expenseList = ArrayList<ExpenseDataClass>()
     private var money : Double = 0.0
+    private var total_expense: Double = 0.0
     private val moneyViewModel : MoneyViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,15 +45,15 @@ class HomeFragment : Fragment() {
             binding.expenseRecyclerView.adapter = expenseAdapter
         })
 
+        moneyViewModel.totalExpenseAmount.observe(viewLifecycleOwner,{totalExpense ->
+            binding.expenseBalSet.text = totalExpense
+        })
+
         binding.addExpenseCard.setOnClickListener()
         {
             showAddExpenseCardDialog()
         }
 
-        /*expenseAdapter = ExpenseAdapter(expenseList,requireContext())
-
-        binding.expenseRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.expenseRecyclerView.adapter = expenseAdapter*/
         return binding.root
     }
 
@@ -82,6 +83,7 @@ class HomeFragment : Fragment() {
                     val expense = ExpenseDataClass(expenseName, expenseDate, expenseValue)
                     moneyViewModel.addExpense(expense)
                     money -= expenseValue
+                    //total_expense += expenseValue
                     moneyViewModel.subTractMoneyAmount(expenseValue)
                     binding.totalBalanceSetText.text = money.toString()
                     Toast.makeText(requireContext(), "Expense added", Toast.LENGTH_SHORT).show()
