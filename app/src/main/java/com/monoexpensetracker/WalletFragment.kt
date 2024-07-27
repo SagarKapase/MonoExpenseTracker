@@ -48,7 +48,8 @@ class WalletFragment : Fragment() {
 
         builder.setPositiveButton("OK"){
             dialog,which ->
-            val enteredNumber = inputText.text.toString().toDoubleOrNull()?:0.0
+            val enteredString = inputText.text.toString().replace(",","")
+            val enteredNumber = enteredString.toDoubleOrNull()?:0.0
 
             moneyViewModel.setMoneyAmount(enteredNumber)
             Toast.makeText(requireContext(),"You added : $enteredNumber money in the wallet",Toast.LENGTH_SHORT).show()

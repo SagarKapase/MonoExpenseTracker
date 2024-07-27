@@ -24,6 +24,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var expenseAdapter: ExpenseAdapter
     private val expenseList = ArrayList<ExpenseDataClass>()
+    private var money : Double = 0.0
     private val moneyViewModel : MoneyViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +33,15 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         moneyViewModel.moneyAmount.observe(viewLifecycleOwner,{amount ->
-            binding.totalBalanceSetText.text = amount
+            val updatedAmount = amount.replace(",", "").toDoubleOrNull() ?: 0.0
+            binding.totalBalanceSetText.text = updatedAmount.toString()
+            money = updatedAmount.toDouble()
+        })
+
+        moneyViewModel.expenseList.observe(viewLifecycleOwner,{expenses ->
+            expenseAdapter = ExpenseAdapter(expenses,requireContext())
+            binding.expenseRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+            binding.expenseRecyclerView.adapter = expenseAdapter
         })
 
         binding.addExpenseCard.setOnClickListener()
@@ -40,10 +49,10 @@ class HomeFragment : Fragment() {
             showAddExpenseCardDialog()
         }
 
-        expenseAdapter = ExpenseAdapter(expenseList,requireContext())
+        /*expenseAdapter = ExpenseAdapter(expenseList,requireContext())
 
         binding.expenseRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.expenseRecyclerView.adapter = expenseAdapter
+        binding.expenseRecyclerView.adapter = expenseAdapter*/
         return binding.root
     }
 
@@ -67,9 +76,20 @@ class HomeFragment : Fragment() {
             val expenseValue = expenseValueInput.text.toString().toDoubleOrNull() ?: 0.0
 
             if (expenseName.isNotEmpty() && expenseDate.isNotEmpty() && expenseValue > 0) {
-                val expense = ExpenseDataClass(expenseName, expenseDate, expenseValue)
-                expenseAdapter.addExpense(expense)
-                Toast.makeText(requireContext(), "Expense added", Toast.LENGTH_SHORT).show()
+
+                if (expenseValue.toDouble() <= money)
+                {
+                    val expense = ExpenseDataClass(expenseName, expenseDate, expenseValue)
+                    moneyViewModel.addExpense(expense)
+                    money -= expenseValue
+                    moneyViewModel.subTractMoneyAmount(expenseValue)
+                    binding.totalBalanceSetText.text = money.toString()
+                    Toast.makeText(requireContext(), "Expense added", Toast.LENGTH_SHORT).show()
+                }else
+                {
+                    Toast.makeText(requireContext(), "Insufficient Balance", Toast.LENGTH_SHORT).show()
+                }
+
             } else {
                 Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
             }
