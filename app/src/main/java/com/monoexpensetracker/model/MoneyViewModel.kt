@@ -11,6 +11,7 @@ import com.google.gson.reflect.TypeToken
 import com.monoexpensetracker.dataclass.ExpenseDataClass
 import java.text.NumberFormat
 import java.util.Locale
+import kotlin.math.exp
 
 class MoneyViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -100,5 +101,26 @@ class MoneyViewModel(application: Application) : AndroidViewModel(application) {
     private fun formatAmount(amount: Double):String
     {
         return NumberFormat.getInstance(Locale.getDefault()).format(amount)
+    }
+
+    //this is method to remove the expense when delete button is clicked
+    fun removeExpense(expense: ExpenseDataClass)
+    {
+        val list = _expenseList.value ?: return
+        list.remove(expense)
+        _expenseList.value = list
+        saveExpenseList(list)
+
+        val currentTotalExpense = prefs.getFloat(KEY_TOTAL_EXPENSE_AMOUNT,0.0f).toDouble()
+        val newTotalExpense = currentTotalExpense - expense.ExpenseValue
+        prefs.edit().putFloat(KEY_TOTAL_EXPENSE_AMOUNT,newTotalExpense.toFloat()).apply()
+        _totalExpenseAmount.value = formatAmount(newTotalExpense)
+
+        //adding delete amount to the totalExpenseAmount
+        val currentTotalAmount = prefs.getFloat(KEY_MONEY_AMOUNT,0.0f).toDouble()
+        val NewTotalAmount = currentTotalAmount + expense.ExpenseValue
+        prefs.edit().putFloat(KEY_MONEY_AMOUNT,NewTotalAmount.toFloat()).apply()
+        _moneyAmount.value = formatAmount(NewTotalAmount)
+
     }
 }

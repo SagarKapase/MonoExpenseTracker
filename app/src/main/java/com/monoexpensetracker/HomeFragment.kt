@@ -40,7 +40,7 @@ class HomeFragment : Fragment() {
         })
 
         moneyViewModel.expenseList.observe(viewLifecycleOwner,{expenses ->
-            expenseAdapter = ExpenseAdapter(expenses,requireContext())
+            expenseAdapter = ExpenseAdapter(expenses,requireContext(),moneyViewModel)
             binding.expenseRecyclerView.layoutManager = LinearLayoutManager(requireContext())
             binding.expenseRecyclerView.adapter = expenseAdapter
         })

@@ -2,14 +2,21 @@ package com.monoexpensetracker.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.MenuInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.monoexpensetracker.R
 import com.monoexpensetracker.databinding.ExpenseHistoryCardBinding
 import com.monoexpensetracker.dataclass.ExpenseDataClass
+import com.monoexpensetracker.model.MoneyViewModel
+import java.util.zip.Inflater
 import kotlin.math.exp
 
-class ExpenseAdapter(var datalist: ArrayList<ExpenseDataClass>,var context: Context):
+class ExpenseAdapter(var datalist: ArrayList<ExpenseDataClass>,var context: Context,
+    private val moneyViewModel: MoneyViewModel):
     RecyclerView.Adapter<ExpenseAdapter.ExpenseViewHolder>() {
 
     inner class ExpenseViewHolder (var binding: ExpenseHistoryCardBinding):RecyclerView.ViewHolder(binding.root){
@@ -18,6 +25,28 @@ class ExpenseAdapter(var datalist: ArrayList<ExpenseDataClass>,var context: Cont
             binding.expenseName.text = expense.ExpenseName
             binding.expenseDate.text = expense.ExpenseDate
             binding.expenseValue.text = expense.ExpenseValue.toString()
+            binding.threeDotsMenu.setOnClickListener{view ->
+                showMenu(view,expense)
+            }
+        }
+
+        private fun showMenu(view: View,expense: ExpenseDataClass)
+        {
+            val popUpMenu = PopupMenu(context,view)
+            val inflater: MenuInflater = popUpMenu.menuInflater
+            inflater.inflate(R.menu.expense_card_menu,popUpMenu.menu)
+            popUpMenu.setOnMenuItemClickListener { item ->
+                when(item.itemId)
+                {
+                    R.id.delete_expense ->
+                    {
+                        moneyViewModel.removeExpense(expense)
+                        notifyItemRemoved(adapterPosition)
+                        true
+                    } else -> false
+                }
+            }
+            popUpMenu.show()
         }
     }
 
