@@ -1,5 +1,6 @@
 package com.monoexpensetracker
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import com.monoexpensetracker.databinding.FragmentHomeBinding
 import com.monoexpensetracker.dataclass.ExpenseDataClass
 import com.monoexpensetracker.model.MoneyViewModel
 import java.text.NumberFormat
+import java.util.Calendar
 import java.util.Locale
 
 
@@ -69,6 +71,10 @@ class HomeFragment : Fragment() {
         val expenseDateInput = dialogView.findViewById<EditText>(R.id.expenseDateInput)
         val expenseValueInput = dialogView.findViewById<EditText>(R.id.expenseValueInput)
 
+        expenseDateInput.setOnClickListener()
+        {
+            showDatePickerDialog(expenseDateInput)
+        }
         builder.setView(dialogView)
 
         builder.setPositiveButton("OK") { dialog, which ->
@@ -100,5 +106,23 @@ class HomeFragment : Fragment() {
             dialog.cancel()
         }
         builder.show()
+    }
+    private fun showDatePickerDialog(expenseDateInput: EditText)
+    {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDilog = DatePickerDialog(
+            requireContext(),
+            {
+                view,year,monthOfYear,dayOfMonth ->
+                val selectedDate = "$dayOfMonth/${monthOfYear+1}/$year"
+                expenseDateInput.setText(selectedDate)
+            },
+            year,month,day
+        )
+        datePickerDilog.show()
     }
 }
