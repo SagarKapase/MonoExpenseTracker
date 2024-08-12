@@ -48,10 +48,6 @@ Mono App is a user-friendly expense tracker designed to help you manage your fin
 
 We welcome contributions to improve Mono App. Please follow the guidelines outlined in `CONTRIBUTING.md`.
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## Contact
 
 For any questions or feedback, please reach out to (mailto:sagarkapase139@gmail.com).
