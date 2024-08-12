@@ -18,7 +18,7 @@ Mono App is a user-friendly expense tracker designed to help you manage your fin
 ### Prerequisites
 
 - Android Studio
-- Java Development Kit (JDK)
+- Basic Understanding of Kotlin Programming Language
 - Android Device or Emulator
 
 ### Steps
