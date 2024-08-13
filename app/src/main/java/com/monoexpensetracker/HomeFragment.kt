@@ -35,6 +35,20 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+
+        //setting the Greetings on the screen
+        val calendar = Calendar.getInstance()
+        val hour = calendar.get(Calendar.HOUR_OF_DAY)
+
+        //determing the greetings based on the time
+         val greeting = when(hour) {
+             in 0..12 -> "Good Morning,"
+             in 12..17 -> "Good Afternoon,"
+             else -> "Good Evening,"
+         }
+
+        binding.greetingsText.text = greeting
+
         moneyViewModel.moneyAmount.observe(viewLifecycleOwner,{amount ->
             val updatedAmount = amount.replace(",", "").toDoubleOrNull() ?: 0.0
             binding.totalBalanceSetText.text = updatedAmount.toString()

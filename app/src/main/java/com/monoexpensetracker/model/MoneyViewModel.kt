@@ -10,6 +10,8 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.monoexpensetracker.dataclass.ExpenseDataClass
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Locale
 import kotlin.math.exp
 
@@ -122,5 +124,27 @@ class MoneyViewModel(application: Application) : AndroidViewModel(application) {
         prefs.edit().putFloat(KEY_MONEY_AMOUNT,NewTotalAmount.toFloat()).apply()
         _moneyAmount.value = formatAmount(NewTotalAmount)
 
+    }
+
+    fun getExpenseByMonth():Map<String,Double>
+    {
+        val expenses = _expenseList.value ?: ArrayList()
+        val expenseByMonth = mutableMapOf<String,Double>()
+
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy",Locale.getDefault())
+
+        for (expense in expenses)
+        {
+            val date = dateFormat.parse(expense.ExpenseDate)
+            val calendar = Calendar.getInstance()
+            calendar.time = date
+
+            val month = calendar.getDisplayName(Calendar.MONTH,Calendar.LONG,Locale.getDefault()) ?: ""
+            val year = calendar.get(Calendar.YEAR).toString()
+            val monthYear = "$month $year"
+
+            expenseByMonth[monthYear] = expenseByMonth.getOrDefault(monthYear,0.0)+expense.ExpenseValue
+        }
+        return expenseByMonth
     }
 }
