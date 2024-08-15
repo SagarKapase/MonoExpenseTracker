@@ -57,14 +57,26 @@
 
         <ImageView
             android:id="@+id/add_money_icon"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/plusicon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.41"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView9"
             app:layout_constraintVertical_bias="0.07999998" />
+
+        <ImageView
+            android:id="@+id/reseticon_click"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/reseticon"
+            app:layout_constraintBottom_toBottomOf="@+id/add_money_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.19"
+            app:layout_constraintStart_toEndOf="@+id/add_money_icon"
+            app:layout_constraintTop_toTopOf="@+id/add_money_icon" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
@@ -80,7 +92,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/backimgicon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/backicon"

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Gray shadow layer -->
+   <!-- &lt;!&ndash; Gray shadow layer &ndash;&gt;
     <item android:left="0dp" android:top="2dp">
         <shape android:shape="rectangle">
             <solid android:color="#e6e1e1" />
-            <corners android:radius="38dp" /> <!-- Adjust the radius as needed -->
+            <corners android:radius="38dp" /> &lt;!&ndash; Adjust the radius as needed &ndash;&gt;
         </shape>
-    </item>
+    </item>-->
 
     <!-- Button foreground layer -->
     <item android:bottom="2dp" android:right="0dp">

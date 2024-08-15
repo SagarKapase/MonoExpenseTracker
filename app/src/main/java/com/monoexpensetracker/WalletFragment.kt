@@ -33,6 +33,10 @@ class WalletFragment : Fragment() {
             binding.walletSetMoney.text = amount
         })
 
+        binding.backimgicon.setOnClickListener()
+        {
+            requireActivity().supportFragmentManager.popBackStack()
+        }
 
         return binding.root
     }
