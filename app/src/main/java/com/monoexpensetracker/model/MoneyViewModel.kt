@@ -22,6 +22,7 @@ class MoneyViewModel(application: Application) : AndroidViewModel(application) {
         private const val KEY_MONEY_AMOUNT = "money_amount"
         private const val KEY_EXPENSE_LIST = "expense_list"
         private const val KEY_TOTAL_EXPENSE_AMOUNT = "total_expense"
+        private const val KEY_IS_FIRST_LAUNCH = "is_first_launch"
     }
 
     private val prefs = application.getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE)
@@ -42,6 +43,16 @@ class MoneyViewModel(application: Application) : AndroidViewModel(application) {
         loadMoneyAmount()
         loadExpenseList()
         loadTotalExpenseAmount()
+    }
+
+    // Check if it's the first launch of the app
+    fun isFirstLaunch(): Boolean {
+        return prefs.getBoolean(KEY_IS_FIRST_LAUNCH, true)
+    }
+
+    // Set the first launch flag to false after showing onboarding
+    fun setFirstLaunchCompleted() {
+        prefs.edit().putBoolean(KEY_IS_FIRST_LAUNCH, false).apply()
     }
 
     fun loadMoneyAmount()
