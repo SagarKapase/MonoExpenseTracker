@@ -25,7 +25,7 @@ Mono App is a user-friendly expense tracker designed to help you manage your fin
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/mono-app-expense-tracker.git
+   git clone https://github.com/SagarKapase/mono-app-expense-tracker.git
    ```
 2. Open the project in Android Studio.
 3. Sync the project with Gradle files.
