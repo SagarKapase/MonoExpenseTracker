@@ -5,22 +5,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.monoexpensetracker.databinding.FragmentProfileBinding
+import com.monoexpensetracker.databinding.FragmentJokesBinding
 import com.monoexpensetracker.dataclass.JokeResponse
 import com.monoexpensetracker.objectpkg.RetrofitInstance
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ProfileFragment : Fragment() {
+class JokesFragment : Fragment() {
 
-    private lateinit var binding: FragmentProfileBinding
+    private lateinit var binding: FragmentJokesBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
+        binding = FragmentJokesBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 

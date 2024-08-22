@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_wallet" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.monoexpensetracker.ProfileFragment"
+        android:name="com.monoexpensetracker.JokesFragment"
         android:label="fragment_profilee"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_jokes" />
 </navigation>
