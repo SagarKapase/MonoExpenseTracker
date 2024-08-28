@@ -1,10 +1,13 @@
 package com.monoexpensetracker
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.forEach
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -35,7 +38,21 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setupWithNavController(navController)
         //setupActionBarWithNavController(navController,appBarConfiguration)
 
+        /*bottomNavigationView.setOnNavigationItemSelectedListener {item ->
+            bottomNavigationView.menu.forEach { menuItem ->
+                val view = bottomNavigationView.findViewById<View>(menuItem.itemId)
+                view?.setBackgroundColor(ContextCompat.getColor(this,android.R.color.transparent))
+            }
+            // Set background color for selected item
+            val selectedView = bottomNavigationView.findViewById<View>(item.itemId)
+            selectedView?.setBackgroundColor(
+                ContextCompat.getColor(this, R.color.darkMainColor)
+            )
 
+            // Navigate to the selected fragment
+            navController.navigate(item.itemId)
+            true
+        }*/
 
     }
 
