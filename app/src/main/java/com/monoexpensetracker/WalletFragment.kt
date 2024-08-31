@@ -38,7 +38,32 @@ class WalletFragment : Fragment() {
             requireActivity().supportFragmentManager.popBackStack()
         }
 
+        binding.reseticonClick.setOnClickListener()
+        {
+            showAlertDialogBox()
+        }
+
         return binding.root
+    }
+
+    private fun showAlertDialogBox()
+    {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Reset Money")
+            .setMessage("Are you sure want to reset the money ?")
+            .setPositiveButton("Yes"){
+                dialog, which ->
+                resetMoney()
+            }
+            .setNegativeButton("No"){
+                dialog,which ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+    private fun resetMoney()
+    {
+        moneyViewModel.resetMoney()
     }
     private fun showInputDialogBox()
     {

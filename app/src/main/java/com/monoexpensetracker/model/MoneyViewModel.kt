@@ -55,6 +55,11 @@ class MoneyViewModel(application: Application) : AndroidViewModel(application) {
         prefs.edit().putBoolean(KEY_IS_FIRST_LAUNCH, false).apply()
     }
 
+    fun resetMoney()
+    {
+        _moneyAmount.value = "0.0"
+        prefs.edit().putFloat(KEY_MONEY_AMOUNT,0.0f).apply()
+    }
     fun loadMoneyAmount()
     {
         val amount = prefs.getFloat(KEY_MONEY_AMOUNT,0.0f).toDouble()
