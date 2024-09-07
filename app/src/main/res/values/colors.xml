@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="splashScreenColor">#56a39d</color>
-    <color name="darkMainColor">#2f7e79</color>
+    <color name="splashScreenColor">#0a091e</color>
+    <color name="darkMainColor">#0d0c27</color>
     <color name="colorPrimary">#6200EA</color>
     <color name="colorPrimaryDark">#5502C8</color>
     <color name="colorAccent">#9D46FF</color>

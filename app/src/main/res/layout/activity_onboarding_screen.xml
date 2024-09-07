@@ -71,19 +71,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/edittextshape"
+        android:elevation="10dp"
+        android:ems="10"
+        android:hint="Enter Your Name"
+        android:inputType="text"
+        android:padding="20dp"
+        android:shadowColor="@color/black"
+        android:shadowDy="4"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
     <Button
         android:id="@+id/get_started_btn"
         android:layout_width="340dp"
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/btn_shape"
+        android:elevation="8dp"
         android:text="Get Started"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="18sp"
-        android:elevation="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintEnd_toEndOf="@+id/username"
+        app:layout_constraintStart_toStartOf="@+id/username"
+        app:layout_constraintTop_toBottomOf="@+id/username" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

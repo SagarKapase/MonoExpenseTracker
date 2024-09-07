@@ -221,14 +221,13 @@
                     android:id="@+id/addExpenseCard"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-
                     android:src="@drawable/plusbgicon"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/expenseRecyclerView"
-                    app:layout_constraintHorizontal_bias="0.52"
+                    app:layout_constraintHorizontal_bias="0.979"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="1.0" />
+                    app:layout_constraintVertical_bias="0.966" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </LinearLayout>
