@@ -34,7 +34,10 @@ class SplashScreenActivity : AppCompatActivity() {
         }else
         {
             Handler(Looper.getMainLooper()).postDelayed({
-                val intent = Intent(this,MainActivity::class.java)
+                val existingUsername = moneyViewModel.loadUserName()
+                val intent = Intent(this,MainActivity::class.java).apply {
+                    putExtra("username",existingUsername)
+                }
                 startActivity(intent)
                 finish()
             },3000)

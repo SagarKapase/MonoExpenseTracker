@@ -23,6 +23,7 @@ class MoneyViewModel(application: Application) : AndroidViewModel(application) {
         private const val KEY_EXPENSE_LIST = "expense_list"
         private const val KEY_TOTAL_EXPENSE_AMOUNT = "total_expense"
         private const val KEY_IS_FIRST_LAUNCH = "is_first_launch"
+        private const val KEY_USERNAME = "username"
     }
 
     private val prefs = application.getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE)
@@ -39,12 +40,23 @@ class MoneyViewModel(application: Application) : AndroidViewModel(application) {
     private val _expenseList = MutableLiveData<ArrayList<ExpenseDataClass>>()
     val expenseList: LiveData<ArrayList<ExpenseDataClass>> get() = _expenseList
 
+    private val _username = MutableLiveData<String>()
+    val username : LiveData<String> get() = _username
+
     init {
         loadMoneyAmount()
         loadExpenseList()
         loadTotalExpenseAmount()
+        loadUserName()
     }
 
+    fun loadUserName(): String? {
+        return prefs.getString(KEY_USERNAME,null)
+    }
+    fun saveUserName(username: String)
+    {
+        prefs.edit().putString(KEY_USERNAME,username).apply()
+    }
     // Check if it's the first launch of the app
     fun isFirstLaunch(): Boolean {
         return prefs.getBoolean(KEY_IS_FIRST_LAUNCH, true)

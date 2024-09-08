@@ -1,6 +1,7 @@
 package com.monoexpensetracker
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -48,6 +49,9 @@ class HomeFragment : Fragment() {
          }
 
         binding.greetingsText.text = greeting
+
+        val username = arguments?.getString("username")
+        binding.usernameHome.text = username.toString()
 
         moneyViewModel.moneyAmount.observe(viewLifecycleOwner,{amount ->
             val updatedAmount = amount.replace(",", "").toDoubleOrNull() ?: 0.0

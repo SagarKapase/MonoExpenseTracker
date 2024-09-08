@@ -8,8 +8,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.forEach
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
@@ -31,28 +34,31 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        navController = findNavController(R.id.navHostFragment)
+       /* navController = findNavController(R.id.navHostFragment)
         bottomNavigationView =binding.bottomNavigationViews
 
-        val appBarConfiguration = AppBarConfiguration(setOf(R.id.homeFragment,R.id.statisticsFragment,R.id.walletFragment,R.id.profileFragment))
+        *//*val appBarConfiguration = AppBarConfiguration(setOf(R.id.homeFragment,R.id.statisticsFragment,R.id.walletFragment,R.id.profileFragment))
+        bottomNavigationView.setupWithNavController(navController)*//*
+
+        bottomNavigationView.setupWithNavController(navController)*/
+        // Set up the NavController with BottomNavigationView
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.navHostFragment) as NavHostFragment
+        navController = navHostFragment.navController
+
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationViews)
         bottomNavigationView.setupWithNavController(navController)
-        //setupActionBarWithNavController(navController,appBarConfiguration)
 
-        /*bottomNavigationView.setOnNavigationItemSelectedListener {item ->
-            bottomNavigationView.menu.forEach { menuItem ->
-                val view = bottomNavigationView.findViewById<View>(menuItem.itemId)
-                view?.setBackgroundColor(ContextCompat.getColor(this,android.R.color.transparent))
+
+        val username = intent.getStringExtra("username")
+        if (username != null)
+        {
+            val bundle = Bundle().apply {
+                putString("username",username)
             }
-            // Set background color for selected item
-            val selectedView = bottomNavigationView.findViewById<View>(item.itemId)
-            selectedView?.setBackgroundColor(
-                ContextCompat.getColor(this, R.color.darkMainColor)
-            )
-
-            // Navigate to the selected fragment
-            navController.navigate(item.itemId)
-            true
-        }*/
+            // Navigate to HomeFragment using the NavController and pass the bundle
+            navController.navigate(R.id.homeFragment, bundle)
+        }
 
     }
 
